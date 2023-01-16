@@ -5,24 +5,15 @@
                 <p class="item__title" v-if="title !=undefined">{{title}}</p>
                 <p class="item__text">{{text}}</p>
             </div>
-            <div class="item-tags-wrapper">
-                <data-tag 
-                    v-for="tag in tags"
-                    :icon="tag.icon"
-                    :text="tag.text" 
-                    :color="tag.color"/>
-            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import DataTag from '@/Components/DataTag/DataTag.vue';
 import { defineProps } from 'vue'
 
 const props = defineProps({
     text: String,
-    tags: Array,
     HexColor1: String,
     HexColor2: String,
     title: {
@@ -46,32 +37,35 @@ p {
     &-wrapper {
         width: 100%;
         height: 100%;
-        border-radius: 10px;
-        // background-color: #FFF;
-        padding: 20px 15px;
+        padding: 20px 40px;
         box-sizing: border-box;
+        border-radius: 15px;
     }
 
     &-text-wrapper{
         width: auto;
         max-width: 910px;
     }
-
-    &-tags-wrapper {
-        margin-top: 1rem;
-        width: 100%;
+    &__title{
+        font-weight: 700;
+        font-size: 35px;
+        line-height: 42px;
         display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
+        align-items: center;
+
+        color: #FFFFFF;
     }
 
-
     &__text {
-        font-size: 20px;
         font-weight: 400;
-        width: auto;
-        max-width: 100%;
-        word-wrap: break-word;
+        font-size: 20px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+
+        color: #FFFFFF;
+
+
     }
 }
 </style>

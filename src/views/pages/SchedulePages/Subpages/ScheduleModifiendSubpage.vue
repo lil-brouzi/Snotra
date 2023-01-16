@@ -11,11 +11,10 @@
                 :HexColor1="'#' + '60A3FC'"
                 :HexColor2="'#' + '60A3FC'"
                 :comment="lesson.comment"
-                :active="'Сейчас идет'"
                 :tags="[
                     {
                         icon: 'algebra.png',
-                        text: lesson.subjectFullName,
+                        text: lesson.className,
                         color: '#F4E7E7D9'
                     },
                     {

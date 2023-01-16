@@ -1,30 +1,33 @@
 <template>
     <div class="item">
         <div class="item-wrapper" :style="'background: linear-gradient(180deg, ' + HexColor1 + ' 0%, ' + HexColor2 + ' 100%'">
-            <div class="item-text-and-tag-wrapper">
-                <div class="text-and-circle">
-                    <div class="item-circle" v-if="icon != null">
-                        <div class="item-circle__border">
-                            <img class="item-circle__icon" :src="icon === undefined ? require(`@/Icons/emojis/${icon}`) : `http://80.78.251.54:7300/${icon}`"/>
+            <div class="item__num" v-if="num != undefined"><p>{{num}}</p></div>
+            <div>
+                <div class="item-text-and-tag-wrapper">
+                    <div class="text-and-circle">
+                        <div class="item-circle" v-if="icon != null">
+                            <div class="item-circle__border">
+                                <img class="item-circle__icon" :src="icon === undefined ? require(`@/Icons/emojis/${icon}`) : `http://80.78.251.54:7300/${icon}`"/>
+                            </div>
                         </div>
+                        <p class="item__text">{{text}}</p>
                     </div>
-                    <p class="item__text">{{text}}</p>
+                    <div class="item-tag-activities" v-if="active != null">
+                        <span class="item-tag-activities__text">{{active}}</span>
+                        <div class="item__circle"></div>
+                    </div>
                 </div>
-                <div class="item-tag-activities" v-if="active != null">
-                    <span class="item-tag-activities__text">{{active}}</span>
-                    <div class="item__circle"></div>
+                <div class="item-comments-wrapper" v-if="comment != null">
+                    <img class="item-circle__icon" :src="require(`@/Icons/emojis/hand.png`)"/>
+                    <span class="item__comment">{{comment}}</span>
                 </div>
-            </div>
-            <div class="item-comments-wrapper" v-if="comment != null">
-                <img class="item-circle__icon" :src="require(`@/Icons/emojis/hand.png`)"/>
-                <span class="item__comment">{{comment}}</span>
-            </div>
-            <div class="item-tags-wrapper">
-                <data-tag 
-                    v-for="tag in tags"
-                    :icon="tag.icon"
-                    :text="tag.text" 
-                    :color="tag.color"/>
+                <div class="item-tags-wrapper">
+                    <data-tag 
+                        v-for="tag in tags"
+                        :icon="tag.icon"
+                        :text="tag.text" 
+                        :color="tag.color"/>
+                </div>
             </div>
         </div>
     </div>
@@ -40,6 +43,10 @@ const props = defineProps({
             type: String,
             default: undefined
         },
+    num: {
+        type: String,
+        default: undefined
+    },
     tags: Array,
     comment: String,
     active: String,
@@ -57,6 +64,15 @@ const props = defineProps({
     .text-and-circle {
         display: flex;
         justify-content: start;
+    }
+    &__num{
+        font-weight: 700;
+        font-size: 50px;
+        line-height: 60px;
+        align-items: center;
+        color: #FFFFFF;
+        margin-right: 20px;
+        
     }
     &-circle {
         width: 55px;
@@ -89,6 +105,8 @@ const props = defineProps({
         border-radius: 10px;
         padding: 20px 27px;
         box-sizing: border-box;
+        display: flex;
+        align-items: center;
     }
 
     &-text-and-tag-wrapper{
@@ -104,7 +122,6 @@ const props = defineProps({
         display: flex;
         gap: 15px;
         flex-wrap: wrap;
-        width: 70%;
     }
 
 
@@ -121,7 +138,7 @@ const props = defineProps({
         height: auto;
         min-width: 130px;
         max-height: 30px;
-        background: rgba(255, 255, 255, 0.85);
+        background: rgba(255, 255, 255, 0.5);
         padding-top: 4px;
         padding-left: 10px;
         padding-bottom: 4px;
